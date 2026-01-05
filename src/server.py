@@ -61,7 +61,7 @@ def resolve_dataset(dataset):
     permitted_resources = permissions_handler.resource_permissions(
         'oblique_image_datasets', identity
     )
-    if not dataset in permitted_resources:
+    if not dataset in permitted_resources and not '*' in permitted_resources:
         app.logger.warning("Dataset not permitted: %s" % dataset)
         return None, None, None
 
