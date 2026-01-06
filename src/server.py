@@ -58,12 +58,20 @@ def resolve_dataset(dataset):
         return None, None, None
 
     permissions_handler = PermissionsReader(tenant, app.logger)
-    permitted_resources = permissions_handler.resource_permissions(
+    restricted_oblique_datasets = permissions_handler.resource_restrictions(
         'oblique_image_datasets', identity
     )
-    if not dataset in permitted_resources and not '*' in permitted_resources:
-        app.logger.warning("Dataset not permitted: %s" % dataset)
-        return None, None, None
+    permitted_oblique_datasets = permissions_handler.resource_permissions(
+        'oblique_image_datasets', identity
+    )
+    if permissions_handler.permissions_default_allow():
+        if dataset in restricted_oblique_datasets:
+            app.logger.warning("Dataset not permitted: %s" % dataset)
+            return None, None, None
+    else:
+        if '*' not in permitted_oblique_datasets and dataset not in permitted_oblique_datasets:
+            app.logger.warning("Dataset not permitted: %s" % dataset)
+            return None, None, None
 
     dataset_basedir = config.get('dataset_basedir', '/images')
     dataset_dir = os.path.join(dataset_basedir, dataset)
