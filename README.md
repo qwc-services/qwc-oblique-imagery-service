@@ -63,23 +63,23 @@ Example:
 
 Config options in the config file can be overridden by equivalent uppercase environment variables.
 
-| Variable          | Description                    |
-|-------------------|--------------------------------|
-| `DATASET_BASEDIR` | Basedir of datasets.           |
-| `TILE_SIZE`       | Tile size.                     |
-| `MARGIN`          | Dataset margin (in CRS units). |
+Run locally
+-----------
+
+Install dependencies and run:
+
+    export CONFIG_PATH=<CONFIG_PATH>
+    uv run src/server.py
+
+To use configs from a `qwc-docker` setup, set `CONFIG_PATH=<...>/qwc-docker/volumes/config`.
+
+Set `FLASK_DEBUG=1` for additional debug output.
+
+Set `FLASK_RUN_PORT=<port>` to change the default port (default: `5000`).
 
 Docker usage
 ------------
 
-The docker image can be run with the following command:
+The Docker image is published on [Dockerhub](https://hub.docker.com/r/sourcepole/qwc-oblique-imagery-service).
 
-    docker run -p 5000:9090 sourcepole/qwc-oblique-imagery-service
-
-
-Development
------------
-
-Install dependencies and run service:
-
-    uv run src/server.py
+See sample [docker-compose.yml](https://github.com/qwc-services/qwc-docker/blob/master/docker-compose-example.yml) of [qwc-docker](https://github.com/qwc-services/qwc-docker).
