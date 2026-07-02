@@ -269,9 +269,9 @@ pyparsing==3.3.2 \
     --hash=sha256:850ba148bd908d7e2411587e247a1e4f0327839c40e2e5e6d05a007ecc69911d \
     --hash=sha256:c777f4d763f140633dcb6d8a3eda953bf7a214dc4eff598413c070bcdc117cbc
     # via rasterio
-qwc-services-core==1.5.2 \
-    --hash=sha256:1486702ddebc7847e6801dd0d923d55490a7fdbfdc2661b9e74f9ff80c48e756 \
-    --hash=sha256:c1b8ac16663a6be3d85267b26665cb681da0b4ef317a17c79a0f8a5523e08f63
+qwc-services-core==1.6.0 \
+    --hash=sha256:d69d5351ef3f66409bfa1232d5b3299829e5d02fd757e6fa3c9007a5e166733b \
+    --hash=sha256:d7a3424ba126e50cf5a6c6e8ad7e52266043356a87df52e8f08e483fa271bb8d
     # via qwc-oblique-imagery-service
 rasterio==1.4.4 \
     --hash=sha256:019693f14a83ae9225cb57c16e466901d0e6284962dcf13a9f4bb1175b979011 \

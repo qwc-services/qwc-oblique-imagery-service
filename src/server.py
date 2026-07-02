@@ -1,5 +1,5 @@
 from flask import Flask, send_file, url_for
-from flask_restx import Api, Resource, reqparse
+from flask_restx import Resource, reqparse
 import datetime
 import fnmatch
 import math
@@ -9,7 +9,7 @@ import rasterio
 
 from io import BytesIO
 from PIL import Image
-from qwc_services_core.api import CaseInsensitiveArgument
+from qwc_services_core.api import Api, CaseInsensitiveArgument
 from qwc_services_core.app import app_nocache
 from qwc_services_core.auth import auth_manager, optional_auth, get_identity
 from qwc_services_core.tenant_handler import (
@@ -175,9 +175,10 @@ def window_from_bounds(bounds, transform):
 # routes
 @api.route('/<dataset>/config')
 class DatasetConfig(Resource):
-    @api.doc('Get dataset config')
+    @api.doc('get_dataset_config')
     @optional_auth
     def get(self, dataset):
+        """ Get oblique dataset config """
         resource, dataset_dir, config = resolve_dataset(dataset)
         if not resource:
             return "Dataset does not exist or is not permitted", 404
@@ -208,10 +209,11 @@ gettile_parser.add_argument('img', help='Closest image index', required=False, t
 
 @api.route("/<dataset>/tiles/<direction>/<int:z>/<int:x>/<int:y>.png", endpoint="tile")
 class GetTile(Resource):
-    @api.doc('Get requested tile')
+    @api.doc('get_tile')
     @api.expect(gettile_parser)
     @optional_auth
     def get(self, dataset, direction, z, x, y):
+        """ Get oblique dataset tile """
 
         args = gettile_parser.parse_args()
         best_idx = args.get('img', None)
